@@ -10,4 +10,8 @@ router.get('/result', function(req, res, next) {
   res.render('result', { title: 'Express' });
 });
 
+router.post('/upload', function(req, res, next) {
+  res.render('result', { title: 'Express' });
+});
+
 module.exports = router;

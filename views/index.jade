@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form
+  form(method="post" action='/upload')
     input(type='file')
     p Note: your image is never stored.
     
