@@ -3,5 +3,21 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
   body
-    block content
+    div(class="container")
+        header
+            h1
+                span(class="happy")
+                    i(class="fa fa-smile-o fa-2x")
+                    | Happy
+                br
+                span(class="or") Or 
+                span(class="not")  Not
+                i(class="fa fa-frown-o fa-2x not")
+            
+        block content
+        
+        hr
+        footer Happy or Mad Application
+        

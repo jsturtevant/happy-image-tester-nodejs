@@ -1,8 +1,40 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding-bottom: 20px;
+    /*background-color: #86C1B9; 
+    color:#DF5320;*/
 }
 
-a {
-  color: #00B7FF;
+.container{
+    margin :0 auto;
+    max-width:800px;
+    text-align:center;
+}
+
+header h1 .happy{
+    margin-left:-50px;
+}
+
+header h1 .or{
+    padding-left: 90px;
+}
+
+header .fa.fa-frown-o{
+    margin-top:-35px;
+}
+
+input[type='file'] {
+    display: inline-block;
+    width:175px;
+}
+
+.body-content{
+    margin-top: 50px;
+}
+
+h1.happy .happy{
+     color:green;     
+}
+
+h1.sad .not{
+    color:red;     
 }
