@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  form
+    input(type='file')
+    p Note: your image is never stored.
+    
+    button(type="submit") Submit
