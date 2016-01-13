@@ -1,6 +1,7 @@
 extends layout
 
 block content
-  img
+  -var imgsrc = 'data:image/png;base64,'  + modified;
+  img(src=imgsrc)
   
   a(href='/') Do it again
