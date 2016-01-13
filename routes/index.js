@@ -36,11 +36,11 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
             var y = element.faceRectangle.top;
             var x1 = element.faceRectangle.left + element.faceRectangle.width;
             var y1 = element.faceRectangle.top + element.faceRectangle.height;
-            
+
             draw.stroke("red", 2)
                 .fill("#ffffffff")  //transparent box
                 .drawRectangle(x, y, x1, y1)
-            
+
             var happiness = element.scores.happiness
             var sadness = element.scores.sadness
 
@@ -50,9 +50,22 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
                 happyscore = happyscore - 1
         }, this);
 
-        draw.write('uploads/' + 'modified' + '.jpg', function (err) {
+        var tempfile = 'uploads/file' + random(0,3000) + '.jpg';
+        draw.write(tempfile, function (err) {
             if (err) console.log(err);
-            var modifiedimage = base64_encode('uploads/' + 'modified' + '.jpg');
+            var modifiedimage = base64_encode(tempfile);
+
+            // would be better to never store file.  
+            // would need to update projectoxford to work with in memory files.
+            fs.unlink(req.file.path, function(err) {
+                if (err) throw err;
+                console.log('successfully deleted tmp file');
+            });
+
+            fs.unlink(tempfile, function(err)  {
+                if (err) throw err;
+                console.log('successfully deleted /tmp/hello');
+            });
 
             res.render('result', { modified: modifiedimage, isHappy: happyscore });
         });
@@ -67,6 +80,10 @@ function base64_encode(file) {
     var bitmap = fs.readFileSync(file);
     // convert binary data to base64 encoded string
     return new Buffer(bitmap).toString('base64');
+}
+
+function random (low, high) {
+    return Math.random() * (high - low) + low;
 }
 
 module.exports = router;
