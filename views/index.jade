@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  form(method="post" action='/upload')
-    input(type='file')
+  form(method="post" enctype="multipart/form-data" action='/upload')
+    input(type='file' name='thumbnail')
     p Note: your image is never stored.
     
     button(type="submit") Submit
