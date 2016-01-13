@@ -28,6 +28,7 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
     }).then(function (response) {
         console.log(response);
 
+        var happyscore = 0
 
         var draw = gm(req.file.path);
         response.forEach(function (element) {
@@ -35,17 +36,25 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
             var y = element.faceRectangle.top;
             var x1 = element.faceRectangle.left + element.faceRectangle.width;
             var y1 = element.faceRectangle.top + element.faceRectangle.height;
-
+            
             draw.stroke("red", 2)
                 .fill("#ffffffff")  //transparent box
                 .drawRectangle(x, y, x1, y1)
+            
+            var happiness = element.scores.happiness
+            var sadness = element.scores.sadness
+
+            if (happiness > sadness)
+                happyscore = happyscore + 1
+            else
+                happyscore = happyscore - 1
         }, this);
 
         draw.write('uploads/' + 'modified' + '.jpg', function (err) {
             if (err) console.log(err);
             var modifiedimage = base64_encode('uploads/' + 'modified' + '.jpg');
 
-            res.render('result', { modified: modifiedimage });
+            res.render('result', { modified: modifiedimage, isHappy: happyscore });
         });
 
     });
