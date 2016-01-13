@@ -21,7 +21,7 @@ router.get('/result', function (req, res, next) {
 });
 
 router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
-    var client = new oxford.Client('b38409352b284f459b5e60a3e9eb4fcd');
+    var client = new oxford.Client('');
 
     client.emotion.analyzeEmotion({
         path: req.file.path,
