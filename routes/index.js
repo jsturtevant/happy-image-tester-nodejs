@@ -2,14 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var multer = require('multer');
-//var storage = multer.memoryStorage()
 var upload = multer({ dest: 'uploads/' });
 var oxford = require('project-oxford');
 var fs = require('fs')
     , gm = require('gm');
-
-
-
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -21,17 +17,18 @@ router.get('/result', function (req, res, next) {
 });
 
 router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
-    var client = new oxford.Client('');
 
+    var client = new oxford.Client('9b8937c403bf4119adeb6580dab73171');
+    
     client.emotion.analyzeEmotion({
         path: req.file.path,
-    }).then(function (response) {
-        console.log(response);
+    }).then(function (emotionresponse) {
+        console.log(emotionresponse);
 
         var happyscore = 0
 
         var draw = gm(req.file.path);
-        response.forEach(function (element) {
+        emotionresponse.forEach(function (element) {
             var x = element.faceRectangle.left;
             var y = element.faceRectangle.top;
             var x1 = element.faceRectangle.left + element.faceRectangle.width;
@@ -50,19 +47,19 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
                 happyscore = happyscore - 1
         }, this);
 
-        var tempfile = 'uploads/file' + random(0,3000) + '.jpg';
+        var tempfile = 'uploads/file' + random(0, 3000) + '.jpg';
         draw.write(tempfile, function (err) {
             if (err) console.log(err);
             var modifiedimage = base64_encode(tempfile);
 
             // would be better to never store file.  
             // would need to update projectoxford to work with in memory files.
-            fs.unlink(req.file.path, function(err) {
+            fs.unlink(req.file.path, function (err) {
                 if (err) throw err;
                 console.log('successfully deleted tmp file');
             });
 
-            fs.unlink(tempfile, function(err)  {
+            fs.unlink(tempfile, function (err) {
                 if (err) throw err;
                 console.log('successfully deleted /tmp/hello');
             });
@@ -82,7 +79,7 @@ function base64_encode(file) {
     return new Buffer(bitmap).toString('base64');
 }
 
-function random (low, high) {
+function random(low, high) {
     return Math.random() * (high - low) + low;
 }
 
