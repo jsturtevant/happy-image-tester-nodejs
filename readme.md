@@ -11,8 +11,8 @@ Uses GM module which requires setup of GraphicsMagick or ImageMagick: https://gi
 
 ##Set up 
 1. First install GraphicsMagick (or Image Magick.  I found GraphicsMagic was easier to set up on windows) 
-..*1. For Windows go to http://www.graphicsmagick.org/download.html and click on [Sourceforge](http://sourceforge.net/projects/graphicsmagick/files/) and select the link next to "Looking for the latest version?"
-..*2. On Mac ```brew install graphicsmagick``` 
+  *1. For Windows go to http://www.graphicsmagick.org/download.html and click on [Sourceforge](http://sourceforge.net/projects/graphicsmagick/files/) and select the link next to "Looking for the latest version?"
+  *2. On Mac ```brew install graphicsmagick``` 
 2. Clone this repo and ```cd happy-image-tester-nodejs``` into the folder
 3. Open a terminal or cmd prompt
 3. Install dependencies: ```npm install```
