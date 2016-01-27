@@ -8,6 +8,8 @@ Prefer Python?  Check out this [sample in Python](https://github.com/jsturtevant
 
 ##Set up 
 1. First install GraphicsMagick (or Image Magick.  I found GraphicsMagic was easier to set up on windows)
+    a. For Windows go to http://www.graphicsmagick.org/download.html and click on [Sourceforge](http://sourceforge.net/projects/graphicsmagick/files/) and select the link next to "Looking for the latest version?"
+    b. On Mac ```brew install graphicsmagick``` 
 2. Clone this repo and ```cd happy-image-tester-nodejs``` into the folder
 3. Open a terminal or cmd prompt
 3. Install dependencies: ```npm install```
