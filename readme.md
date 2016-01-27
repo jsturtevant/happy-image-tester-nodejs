@@ -2,13 +2,13 @@
 
 This project is a demo to show how to use https://www.projectoxford.ai/.  You will need to obtain a key for the Emotion API [here](https://www.projectoxford.ai/Subscription).  See below for how to set environment key for windows or mac/linux.
 
-You can find a demo at http://happyornot.azurewebsites.net/. 
+You can find a demo at http://happyimagetester.azurewebsites.net/. 
 
-Prefer Python?  Check out this [sample in Python](https://github.com/jsturtevant/happy-or-not-django).
+Prefer Python?  Check out this [sample in Python](https://github.com/jsturtevant/happy-image-tester-django).
 
 ##Set up 
 1. First install GraphicsMagick (or Image Magick.  I found GraphicsMagic was easier to set up on windows)
-2. Clone this repo
+2. Clone this repo and ```cd happy-image-tester-nodejs``` into the folder
 3. Open a terminal or cmd prompt
 3. Install dependencies: ```npm install```
 4. Set Oxford API Key in environment ([mac/linux](#Set-Environment-Variable-on-mac) or [windows](#Set-Environment-Variable-on-Windows))
