@@ -99,10 +99,10 @@ block content
                         var sadness = 0;
                         var happyscore = 0
                         var count = data.length;
-                        var imgLink = '<img height="400px" src="' +imagePath+ '" />';
-                            $('#image').html(imgLink);
-                            var imgLink = '<img src="' +imagePath+ '" />';
-                            getImgSize(imagePath);
+                        // var imgLink = '<img height="400px" src="' +imagePath+ '" />';
+                        // $('#image').html(imgLink);
+                        // var imgLink = '<img src="' +imagePath+ '" />';
+                        getImgSize(imagePath);
                               
                             for(i =0; i<count; i++){
                                 happiness+= data[i].scores.happiness/count;
@@ -175,6 +175,8 @@ block content
                                  var randomIndex = Math.floor(Math.random()*50);
                                  var imgSrc =  data.value[randomIndex].contentUrl;
                                  $('#url').val(imgSrc);
+                                 var imgLink = '<img height="400px" src="' +imgSrc+ '" />';
+                                 $('#image').html(imgLink);
                                  analyzeImage();})
                              .fail(function() {
                                  alert("error");
