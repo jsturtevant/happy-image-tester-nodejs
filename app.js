@@ -25,8 +25,6 @@ app.use('/', routes);
 app.use('/result', routes);
 app.use('/upload', routes);
 app.use('/analyze', routes);
-// var key = process.environment.OXFORD_KEY;
-// var keyBing = process.environment.BING_KEY;
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

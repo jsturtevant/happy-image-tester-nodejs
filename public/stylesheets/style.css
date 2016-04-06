@@ -45,12 +45,12 @@ h1.sad .not{
 }
 
 h2{
-        font-family: 'Roboto', sans-serif;
+        font-family:sans-serif;
 }
 
 h3{
     font-size: 20px;
-    font-family: 'Roboto', sans-serif;
+    font-family: sans-serif;
 }
 div.myButton input {
     background:url(/search-button-clipart-1.jpg) no-repeat;
