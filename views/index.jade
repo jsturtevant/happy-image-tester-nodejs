@@ -79,8 +79,7 @@ block content
                 $(function() {
                     var imagePath = $('#url').val();
                     var urlJson = '{ "url": "' + imagePath + '"}';
-                    console.log(urlJson)
-                    // var faces= [];
+                   
                     var left= [];
                     var top=[];
                     var height =[];
@@ -145,17 +144,16 @@ block content
                 var newImg = new Image();
 
                 newImg.onload = function() {
-                var height = newImg.height/500;
-                var width = newImg.width/500;
-                $('#scaleH').val(height);
-                $('#scaleW').val(width);
+                    var height = newImg.height/500;
+                    var width = newImg.width/500;
+                    $('#scaleH').val(height);
+                    $('#scaleW').val(width);
                 }
 
                 newImg.src = imgSrc; // this must be done AFTER setting onload
             }
             function getImage() {
                     $(function() {
-                        console.log($('#bingKey').val());
                         var $searchQuery = $('#searchBox').val();
                         var params = {
                             // Request parameters
