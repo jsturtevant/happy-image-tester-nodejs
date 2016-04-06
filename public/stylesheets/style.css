@@ -206,7 +206,7 @@ picImage{
 }
 
 .outsideWrapper{ 
-    width:500px; height:500px; 
+    width:400px; height:400px; 
     margin:20px 60px; 
     /*border:1px solid blue;*/
     }
@@ -222,8 +222,8 @@ picImage{
     position:absolute; top:0px; left:20%;
     /*background-color: rgba(255,0,0,.1);*/
 }.image{
-    height:500px;
-    width:500px;
+    height:400px;
+    width:400px;
     left:20%;
 }
 footer{
