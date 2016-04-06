@@ -99,7 +99,7 @@ block content
                         var sadness = 0;
                         var happyscore = 0
                         var count = data.length;
-                        var imgLink = '<img height="500px" src="' +imagePath+ '" />';
+                        var imgLink = '<img height="400px" src="' +imagePath+ '" />';
                             $('#image').html(imgLink);
                             var imgLink = '<img src="' +imagePath+ '" />';
                             getImgSize(imagePath);
@@ -144,8 +144,8 @@ block content
                 var newImg = new Image();
 
                 newImg.onload = function() {
-                    var height = newImg.height/500;
-                    var width = newImg.width/500;
+                    var height = newImg.height/400;
+                    var width = newImg.width/400;
                     $('#scaleH').val(height);
                     $('#scaleW').val(width);
                 }
