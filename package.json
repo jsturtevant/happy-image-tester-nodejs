@@ -14,7 +14,9 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
+    "node-bing-api": "^2.4.0",
     "project-oxford": "^1.1.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }

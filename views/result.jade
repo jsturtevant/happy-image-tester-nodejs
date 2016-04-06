@@ -2,9 +2,10 @@ extends layout
 
 block content
   -var imgsrc = 'data:image/png;base64,'  + modified;
-  img(src=imgsrc)
-  
-  a(href='/') Do it again
+  img(src=imgsrc height ="500px;")
+  p
+  h2
+    a(href='/') Do it again
 
   if isHappy > 0 
     script(src='/javascripts/happy.js')

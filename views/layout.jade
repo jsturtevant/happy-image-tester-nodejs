@@ -1,5 +1,6 @@
 doctype html
 html
+
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -8,18 +9,21 @@ html
     div(class="container")
         header
             h1
-                span(class="happy")
-                    i(class="fa fa-smile-o fa-2x")
-                    | Happy
+                span(class="happy"  style = "font-size:50px;")
+                    i(class="fa fa-smile-o fa-2x" style="font-size:80px;")
+                    |  Happy
                 br
-                span(class="or") Or 
-                span(class="not")  Not
-                i(class="fa fa-frown-o fa-2x not")
+                span(class="or" style = "font-size:30px;") Or 
+                span(class="not" style = "font-size:50px;")  Not  
+                  i(class="fa fa-frown-o fa-2x not" style="font-size:80px;")
+           h2 How happy or sad do I look?
             
         block content
         
-        hr
-        footer Happy or Mad Application
+        
+        footer 
+            hr
+            h2 Happy or Mad Application
             p The source code for this project is avaliable on 
                 a(href="https://github.com/jsturtevant/happy-image-tester-nodejs") GitHub
         

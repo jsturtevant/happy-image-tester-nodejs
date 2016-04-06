@@ -1,0 +1,40 @@
+extends layout
+block content
+    if isHappy > 0 
+        script(src='/javascripts/happy.js')
+    if  isHappy < 0
+        script(src='/javascripts/mad.js')
+    h2
+        a(href='/') Do it again
+        input(id = "face" value= faces type = "hidden" )
+        input(id="hei" value= scaleH type = "hidden")
+        input(id="wid" value= scaleW type = "hidden")
+    div(class = "outsideWrapper")
+        div(class = "insideWrapper")
+            img(id = "pic" align = "middle" class = "image" src=imgsrc class = "coveredImage")
+            
+            canvas(id="myCanvas" align="middle" height="500" width = "500" class="coveringCanvas")
+            script.
+                window.onload = function() {
+                    var rects = document.getElementById("face").value.split(',');
+                    var height =  document.getElementById("hei").value;
+                    var width =  document.getElementById("wid").value;
+                    
+                    var c=document.getElementById("myCanvas");
+                    
+                    var ctx=c.getContext("2d");
+                    var img=document.getElementById("pic");  
+                            
+                    var canvas = document.getElementById('myCanvas');
+                    var context = canvas.getContext('2d');
+                    var numFace = rects.length/4;
+                    for (i = 0; i < numFace; i++) {
+                        context.beginPath();
+                        context.rect(rects[i]/width, rects[i+numFace]/height, rects[i+2*numFace]/width, rects[i+3*numFace]/height);
+                        context.lineWidth = 2;
+                        context.strokeStyle = 'red';
+                        context.stroke();
+                    }
+                    
+                }
+  
