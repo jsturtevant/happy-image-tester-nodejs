@@ -1,7 +1,8 @@
 extends layout
 block content
     script(src="http://code.jquery.com/jquery-1.11.0.min.js")
-    
+    input(id="oxfordKey" value= oxfordKey type = "hidden")
+    input(id="bingKey" value= bing type = "hidden")
     div(id="selectImage")       
          form
             div(class="input-group" style="background-color: white;" )
@@ -28,11 +29,13 @@ block content
    
     label(id="uploadLabel" class="center-block" style="width: 230px;")
         form(method="post" enctype="multipart/form-data" action='/upload')
-                h2 Or use your own photo.  
-                h3 Note: your image is not stored.                  
+                div(id="yourOwn")
+                    h2 Or use your own photo.  
+                    h3 Note: your image is not stored.                  
                 input(type='file' id="files"  name='thumbnail')
                 br
-                img(id="myImg" src="#" class="picImage" height="300px" style="display:none;")
+                img(id="myImg" src="#" class="picImage" height="500px" style="display:none;")
+                br
                 button(id= "uploadImage" type="submit" style="display:none;") Submit  
                 br
                 script.
@@ -46,6 +49,8 @@ block content
                             }
                             $('#myImg').show();
                             $('#uploadImage').show();
+                            $('#selectImage').hide();
+                            $('#yourOwn').hide();
                         });
                     });
 
@@ -80,11 +85,12 @@ block content
                     var top=[];
                     var height =[];
                     var width=[];
+                    
                     $.ajax({
                         url: "https://api.projectoxford.ai/emotion/v1.0/recognize?" ,
                         beforeSend: function(xhrObj){
                             xhrObj.setRequestHeader("Content-Type","application/json");
-                            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","44761fd9aff44aebac102808165ebc8b");
+                            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",$('#oxfordKey').val());
                         },
                         type: "POST",
                         data: urlJson,
@@ -149,6 +155,7 @@ block content
             }
             function getImage() {
                     $(function() {
+                        console.log($('#bingKey').val());
                         var $searchQuery = $('#searchBox').val();
                         var params = {
                             // Request parameters
@@ -161,7 +168,7 @@ block content
                              url: "https://bingapis.azure-api.net/api/v5/images/search?" + $.param(params),
                              beforeSend: function(xhrObj){
                                  // Request headers
-                                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","05c43c1d1e834fd6ba5ac6093888faaf");
+                                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",$('#bingKey').val());
                                  },
                              type: "GET",
                              data: "{body}",
@@ -181,9 +188,7 @@ block content
             $(document).ready(function() {
                 //Declare variables
                 var $searchButton = $('#searchButton');
-                
-                    
-                    // Trigger function when button is clicked]
+                // Trigger function when button is clicked]
                 $searchButton.click(function(e) {
                     e.preventDefault();
                     getImage();

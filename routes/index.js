@@ -16,7 +16,9 @@ var Bing = require('node-bing-api')
             });
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
+    var key = process.env.OXFORD_KEY;
+    var bingKey= process.env.BING_KEY;
+    res.render('index', { title: 'Happy-or-Not', oxfordKey: key, bing:bingKey});
 });
 
 router.get('/result', function (req, res, next) {
