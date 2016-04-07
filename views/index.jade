@@ -108,7 +108,7 @@ block content
                                 happiness+= data[i].scores.happiness/count;
                                 
                                 sadness+= data[i].scores.sadness/count;
-                                if(data[i].faceRectangle){
+                                // if(data[i].faceRectangle){
                                     
                                     left.push(data[i].faceRectangle.left);
                                     $('#left').attr("value",left);
@@ -122,10 +122,10 @@ block content
                                     height.push(data[i].faceRectangle.height);
                                     $('#height').attr("value",height);
                                     
-                                }
-                                else{
-                                    alert("There are no faces in this image. Press search again")
-                                }
+                                // }
+                                // else{
+                                //     alert("There are no faces in this image. Press search again")
+                                // }
                             }
                             
                             $('<input>').attr('type','hidden').appendTo('form');
