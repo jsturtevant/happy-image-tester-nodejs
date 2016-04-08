@@ -48,14 +48,14 @@ block content
                 
                 img(id="myImg" src="#" class="picImage" height="400px" style="display:none;")
                 br
-                button(id= "uploadImage" type="submit" style="display:none;") Submit  
-                br
-                script.
-                    $(function () {
-                        $('#files').change(function () {
-                            $('#uploadImage').show();
-                        });
-                    });
+                button(id= "uploadImage" type="submit") Submit  
+                // br
+                // script.
+                //     $(function () {
+                //         $('#files').change(function () {
+                //             $('#uploadImage').show();
+                //         });
+                //     });
                 //     function imageIsLoaded(e) {
                 //         $('#myImg').attr('src', e.target.result);
                 //     };
@@ -98,9 +98,7 @@ block content
                         var sadness = 0;
                         var happyscore = 0
                         var count = data.length;
-                        // var imgLink = '<img height="400px" src="' +imagePath+ '" />';
-                        // $('#image').html(imgLink);
-                        // var imgLink = '<img src="' +imagePath+ '" />';
+                        
                         getImgSize(imagePath);
                               
                             for(i =0; i<count; i++){
