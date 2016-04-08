@@ -3,12 +3,7 @@ extends layout
 block content
     
     script(src="http://code.jquery.com/jquery-1.11.0.min.js")
-    script(type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js')
-    // script(type='text/javascript' src='/javascripts/loadImg.js')
-    // script(type='text/javascript').
-    //     $(function(){
-    //         $('image').imgPreload()
-    //         })
+
     input(id="oxfordKey" value= oxfordKey type = "hidden")
     input(id="bingKey" value= bing type = "hidden")
     div(id="selectImage")       
@@ -48,14 +43,14 @@ block content
                 
                 img(id="myImg" src="#" class="picImage" height="400px" style="display:none;")
                 br
-                button(id= "uploadImage" type="submit") Submit  
-                // br
-                // script.
-                //     $(function () {
-                //         $('#files').change(function () {
-                //             $('#uploadImage').show();
-                //         });
-                //     });
+                button(id= "uploadImage" type="submit" style="display:none;") Submit  
+                br
+                script.
+                    $(function () {
+                        $('#files').change(function () {
+                            $('#uploadImage').show();
+                        });
+                    });
                 //     function imageIsLoaded(e) {
                 //         $('#myImg').attr('src', e.target.result);
                 //     };
