@@ -50,29 +50,15 @@ block content
                 br
                 button(id= "uploadImage" type="submit" style="display:none;") Submit  
                 br
-                // script.
-                //     $(function () {
-                //         $('#files').change(function () {
-                //             if (this.files && this.files[0]) {
-                //                 var reader = new FileReader();
-                //                 reader.onload = imageIsLoaded;
-                //                 reader.readAsDataURL(this.files[0]);
-                                
-                //             }
-                //             $('#myImg').show();
-                //             $('#uploadImage').show();
-                //             $('#selectImage').hide();
-                //             $('#yourOwn').hide();
-                //         });
-                //     });
-
+                script.
+                    $(function () {
+                        $('#files').change(function () {
+                            $('#uploadImage').show();
+                        });
+                    });
                 //     function imageIsLoaded(e) {
                 //         $('#myImg').attr('src', e.target.result);
                 //     };
-                br
-
-                    
-                
     form(id ="imageUrl" method = "post" action ="/analyze" enctype='application/json')
         input(type="hidden" id = "score" name = "happyscore" value ="")
         input(type="hidden" id ="left" name = "face" value = "")
