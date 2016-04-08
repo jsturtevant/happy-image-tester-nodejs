@@ -17,6 +17,5 @@
     "node-bing-api": "^2.4.0",
     "project-oxford": "^1.1.0",
     "serve-favicon": "~2.3.0"
-    // "xmlhttprequest": "^1.8.0"
   }
 }
