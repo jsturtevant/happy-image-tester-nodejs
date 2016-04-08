@@ -1,6 +1,14 @@
 extends layout
+
 block content
+    
     script(src="http://code.jquery.com/jquery-1.11.0.min.js")
+    script(type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js')
+    // script(type='text/javascript' src='/javascripts/loadImg.js')
+    // script(type='text/javascript').
+    //     $(function(){
+    //         $('image').imgPreload()
+    //         })
     input(id="oxfordKey" value= oxfordKey type = "hidden")
     input(id="bingKey" value= bing type = "hidden")
     div(id="selectImage")       
@@ -22,10 +30,13 @@ block content
                             script.
                                 $(function(){
                                     $('#searchButton').click(function() {
+                                        $("#image").empty();
                                         $('#uploadLabel').hide();
                                         $('#sub').show();
-                                        });
-                                        });           
+                                        
+                                        $("#loader").show();
+                                    });
+                                });           
    
     label(id="uploadLabel" class="center-block" style="width: 230px;")
         form(method="post" enctype="multipart/form-data" action='/upload')
@@ -34,6 +45,7 @@ block content
                     h3 Note: your image is not stored.                  
                 input(type='file' id="files"  name='thumbnail')
                 br
+                
                 img(id="myImg" src="#" class="picImage" height="500px" style="display:none;")
                 br
                 button(id= "uploadImage" type="submit" style="display:none;") Submit  
@@ -71,7 +83,8 @@ block content
         input(type="hidden" id ="scaleH" name = "scaleH" value="")
         input(type="hidden" id ="scaleW" name = "scaleW" value="")
         div(id = "image" class="picImage")
-        
+        img(id="loader" src="/images/Preloader_7.gif" style="display:none;")
+        br
         button(id = "sub" type="submit" style="display:none;") Submit  
         
         script.
@@ -127,8 +140,6 @@ block content
                                 //     alert("There are no faces in this image. Press search again")
                                 // }
                             }
-                            
-                            $('<input>').attr('type','hidden').appendTo('form');
                             if (happiness > sadness)
                                 happyscore = happyscore + 1
                             else
@@ -136,7 +147,7 @@ block content
                             $('#score').attr("value",happyscore);
                     })
                     .fail(function (jqXHR, textStatus, error) {
-                        // alert("Something went wrong :( Press search again");
+                        alert("Something went wrong :( Press search again");
                     });
                 });
                 };
@@ -154,6 +165,7 @@ block content
             }
             function getImage() {
                     $(function() {
+                        
                         var $searchQuery = $('#searchBox').val();
                         var params = {
                             // Request parameters
@@ -174,6 +186,7 @@ block content
                              .done(function(data) {
                                  var randomIndex = Math.floor(Math.random()*50);
                                  var imgSrc =  data.value[randomIndex].contentUrl;
+                                 $("#loader").hide();
                                  $('#url').val(imgSrc);
                                  var imgLink = '<img height="400px" src="' +imgSrc+ '" />';
                                  $('#image').html(imgLink);
@@ -191,6 +204,7 @@ block content
                 // Trigger function when button is clicked]
                 $searchButton.click(function(e) {
                     e.preventDefault();
+                    // $("#image").empty();
                     getImage();
                 });     
             }); 
