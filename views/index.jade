@@ -50,25 +50,25 @@ block content
                 br
                 button(id= "uploadImage" type="submit" style="display:none;") Submit  
                 br
-                script.
-                    $(function () {
-                        $('#files').change(function () {
-                            if (this.files && this.files[0]) {
-                                var reader = new FileReader();
-                                reader.onload = imageIsLoaded;
-                                reader.readAsDataURL(this.files[0]);
+                // script.
+                //     $(function () {
+                //         $('#files').change(function () {
+                //             if (this.files && this.files[0]) {
+                //                 var reader = new FileReader();
+                //                 reader.onload = imageIsLoaded;
+                //                 reader.readAsDataURL(this.files[0]);
                                 
-                            }
-                            $('#myImg').show();
-                            $('#uploadImage').show();
-                            $('#selectImage').hide();
-                            $('#yourOwn').hide();
-                        });
-                    });
+                //             }
+                //             $('#myImg').show();
+                //             $('#uploadImage').show();
+                //             $('#selectImage').hide();
+                //             $('#yourOwn').hide();
+                //         });
+                //     });
 
-                    function imageIsLoaded(e) {
-                        $('#myImg').attr('src', e.target.result);
-                    };
+                //     function imageIsLoaded(e) {
+                //         $('#myImg').attr('src', e.target.result);
+                //     };
                 br
 
                     
