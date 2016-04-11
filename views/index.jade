@@ -35,25 +35,36 @@ block content
    
     label(id="uploadLabel" class="center-block" style="width: 230px;")
         form(method="post" enctype="multipart/form-data" action='/upload')
-                div(id="yourOwn")
-                    h2 Or use your own photo.  
-                    h3 Note: your image is not stored.                  
-                input(type='file' id="files"  name='thumbnail')
-                br
-                
-                img(id="myImg" src="#" class="picImage" height="400px" style="display:none;")
-                br
-                button(id= "uploadImage" type="submit" style="display:none;") Submit  
-                br
-                script.
-                    $(function () {
-                        $('#files').change(function () {
-                            $('#uploadImage').show();
+                    div(id="yourOwn")
+                        h2 Or use your own photo.  
+                        h3 Note: your image is not stored.                  
+                    input(type='file' id="files"  name='thumbnail')
+                    br
+                    img(id="myImg" src="#" class="picImage" height="500px" style="display:none;")
+                    br
+                    button(id= "uploadImage" type="submit" style="display:none;") Submit  
+                    br
+                    script.
+                        $(function () {
+                            $('#files').change(function () {
+                                if (this.files && this.files[0]) {
+                                    var reader = new FileReader();
+                                    reader.onload = imageIsLoaded;
+                                    reader.readAsDataURL(this.files[0]);
+                                    
+                                }
+                                $('#myImg').show();
+                                $('#uploadImage').show();
+                                $('#selectImage').hide();
+                                $('#yourOwn').hide();
+                            });
                         });
-                    });
-                //     function imageIsLoaded(e) {
-                //         $('#myImg').attr('src', e.target.result);
-                //     };
+
+                        function imageIsLoaded(e) {
+                            $('#myImg').attr('src', e.target.result);
+                        };
+                    br
+    
     form(id ="imageUrl" method = "post" action ="/analyze" enctype='application/json')
         input(type="hidden" id = "score" name = "happyscore" value ="")
         input(type="hidden" id ="left" name = "face" value = "")
