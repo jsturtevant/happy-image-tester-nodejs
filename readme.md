@@ -1,8 +1,8 @@
 # Happy or Not
 
-This project is a demo to show how to use https://www.projectoxford.ai/.  You will need to obtain a key for the Emotion and Bing Search APIs [here](https://www.projectoxford.ai/Subscription).  See below for how to set environment key for windows or mac/linux.
+This project is a demo to show how to use https://www.microsoft.com/cognitive-services/.  You will need to obtain a key for the Emotion and Bing Search APIs [here](https://www.microsoft.com/cognitive-services/en-us/subscriptions).  See below for how to set environment key for windows or mac/linux.
 
-You can find a demo at http://happyimagetester.azurewebsites.net/. 
+You can find a demo at http://howhappyareyou.cloudapp.net/. 
 
 Prefer Python?  Check out this [sample in Python](https://github.com/jsturtevant/happy-image-tester-django).
 
