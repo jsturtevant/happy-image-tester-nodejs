@@ -37,6 +37,7 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
             var x1 = element.faceRectangle.left + element.faceRectangle.width;
             var y1 = element.faceRectangle.top + element.faceRectangle.height;
 
+            console.log("transparent")
             draw.stroke("red", 2)
                 .fill("rgba(124,240,10,0.0)")  //transparent box
                 .drawRectangle(x, y, x1, y1)
