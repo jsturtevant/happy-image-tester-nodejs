@@ -1,0 +1,18 @@
+
+version: '2'
+
+services:
+  happy-image-tester-nodejs:
+    image: happy-image-tester-nodejs:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+      OXFORD_KEY: <yourkey>
+    ports:
+      - 3000:3000
+      - 5858:5858
+    volumes:
+      - .:/usr/src/app
+    #command: nodemon --debug=5858 ./bin/www
