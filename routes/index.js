@@ -28,7 +28,7 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
     }).then(function (emotionresponse) {
         console.log(emotionresponse);
 
-        var happyscore = 0
+        var happyscore = 0;
 
         var draw = magick(req.file.path);
         emotionresponse.forEach(function (element) {
@@ -38,7 +38,7 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
             var y1 = element.faceRectangle.top + element.faceRectangle.height;
 
             draw.stroke("red", 2)
-                .fill("#ffffffff")  //transparent box
+                .fill("rgba(124,240,10,0.0)")  //transparent box
                 .drawRectangle(x, y, x1, y1)
 
             var happiness = element.scores.happiness
