@@ -6,6 +6,7 @@ var upload = multer({ dest: 'uploads/' });
 var oxford = require('project-oxford');
 var fs = require('fs')
     , gm = require('gm');
+var magick = gm.subClass({imageMagick: true});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -17,7 +18,8 @@ router.get('/result', function (req, res, next) {
 });
 
 router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
-    
+    console.log('path of request file:', req.file.path);
+
     var key = process.env.OXFORD_KEY
     var client = new oxford.Client(key);
     
@@ -28,7 +30,7 @@ router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
 
         var happyscore = 0
 
-        var draw = gm(req.file.path);
+        var draw = magick(req.file.path);
         emotionresponse.forEach(function (element) {
             var x = element.faceRectangle.left;
             var y = element.faceRectangle.top;
