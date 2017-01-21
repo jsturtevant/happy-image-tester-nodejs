@@ -8,15 +8,35 @@ var fs = require('fs')
     , gm = require('gm');
 var magick = gm.subClass({imageMagick: true});
 
+
+var Bing = require('node-bing-api')
+            ({ 
+              accKey: "VVFMTT/2MwdUxiIw61NGNvid8vFgi5zaj4APjFnUeoc", 
+              rootUri: "https://api.datamarket.azure.com/Bing/SearchWeb/v1/" 
+            });
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
+    var key = process.env.OXFORD_KEY;
+    var bingKey= process.env.BING_KEY;
+    res.render('index', { title: 'Happy-or-Not', oxfordKey: key, bing:bingKey});
 });
 
 router.get('/result', function (req, res, next) {
     res.render('result', { title: 'Express' });
 });
-
+    
+router.post('/analyze', function (req, res, next) {
+    var key = process.env.OXFORD_KEY;
+    var client = new oxford.Client(key);
+    var face= req.body.face
+    var happy = req.body.happyscore;
+    var url = req.body.url
+    var height = req.body.scaleH;
+    var width = req.body.scaleW;
+    res.render('analyze', { imgsrc: url, faces:face, scaleH:height, scaleW:width, isHappy:happy} );
+    
+});
+           
 router.post('/upload', upload.single('thumbnail'), function (req, res, next) {
     console.log('path of request file:', req.file.path);
 

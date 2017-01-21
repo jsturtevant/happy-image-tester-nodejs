@@ -1,8 +1,8 @@
 # Happy or Not
 
-This project is a demo to show how to use https://www.projectoxford.ai/.  You will need to obtain a key for the Emotion API [here](https://www.projectoxford.ai/Subscription).  See below for how to set environment key for windows or mac/linux.
+This project is a demo to show how to use https://www.microsoft.com/cognitive-services/.  You will need to obtain a key for the Emotion and Bing Search APIs [here](https://www.microsoft.com/cognitive-services/en-us/subscriptions).  See below for how to set environment key for windows or mac/linux.
 
-You can find a demo at http://happyimagetester.azurewebsites.net/. 
+You can find a demo at http://howhappyareyou.cloudapp.net/. 
 
 Prefer Python?  Check out this [sample in Python](https://github.com/jsturtevant/happy-image-tester-django).
 
@@ -23,11 +23,13 @@ Uses GM module which requires setup of GraphicsMagick or ImageMagick: https://gi
 ## Set Environment Variable on Windows
 1. Open cmd prompt
 2. Type ```set OXFORD_KEY=<your key>```  
+3. Type ```set BING_KEY=<your key>```  
 
 If you want to set the environment key permanently you can use [setx](http://ss64.com/nt/setx.html): ```setx OXFORD_KEY <your key>```
 
 ## Set Environment Variable on Mac
 1. Open terminal 
 2. Type ```export OXFORD_KEY=<your key>```
+3. Type ```export BING_KEY=<your key>``` 
 
 If you want to [set the environment key permanently](http://stackoverflow.com/questions/22502759/mac-os-x-10-9-setting-permanent-environment-variables)  you set them in your ```.bashrc``` profile on linux and on mac set them in ```.bash_profile```.

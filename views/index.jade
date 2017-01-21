@@ -1,8 +1,201 @@
 extends layout
 
 block content
-  form(method="post" enctype="multipart/form-data" action='/upload')
-    input(type='file' name='thumbnail')
-    p Note: your image is not stored.
     
-    button(type="submit") Submit
+    script(src="http://code.jquery.com/jquery-1.11.0.min.js")
+
+    input(id="oxfordKey" value= oxfordKey type = "hidden")
+    input(id="bingKey" value= bing type = "hidden")
+    div(id="selectImage")       
+         form
+            div(class="input-group" style="background-color: white;" )
+                table(align="center" width="700px")
+                 span(class="input-group-addon" style="padding: 0px 0px 0px 0px; border: none")
+                     tr(align="center")
+                         td(align="left")
+                            img(id="bLogo" class="" src="http://how-old.net/Images/bing2.png" data-bm="3")
+                         td(align="center" )
+                           input(style="width:600px;" id="searchBox" type="text" name="searchBox" class = "form-control" value= "Search for an image"
+                           onfocus="if(this.value==this.defaultValue)this.value=''; this.style.color='black';" onblur="if(this.value=='')this.value=this.defaultValue; "
+
+                           required)
+                           input(type="hidden" name = "sitesearch" value = "")                             
+                         td
+                            input(tabindex="0" title="Search" class="b_searchboxSubmit" id="searchButton" type="submit" value = "")  
+                            script.
+                                $(function(){
+                                    $('#searchButton').click(function() {
+                                        $("#image").empty();
+                                        $('#uploadLabel').hide();
+                                        $('#sub').show();
+                                        
+                                        $("#loader").show();
+                                    });
+                                });           
+   
+    label(id="uploadLabel" class="center-block" style="width: 230px;")
+        form(method="post" enctype="multipart/form-data" action='/upload')
+                    div(id="yourOwn")
+                        h2 Or use your own photo.  
+                        h3 Note: your image is not stored.                  
+                    input(type='file' id="files"  name='thumbnail')
+                    br
+                    img(id="myImg" src="#" class="picImage" height="400px" style="display:none;")
+                    br
+                    button(id= "uploadImage" type="submit" style="display:none;") Submit  
+                    br
+                    script.
+                        $(function () {
+                            $('#files').change(function () {
+                                if (this.files && this.files[0]) {
+                                    var reader = new FileReader();
+                                    reader.onload = imageIsLoaded;
+                                    reader.readAsDataURL(this.files[0]);
+                                    
+                                }
+                                $('#myImg').show();
+                                $('#uploadImage').show();
+                                $('#selectImage').hide();
+                                $('#yourOwn').hide();
+                            });
+                        });
+
+                        function imageIsLoaded(e) {
+                            $('#myImg').attr('src', e.target.result);
+                        };
+                    br
+    
+    form(id ="imageUrl" method = "post" action ="/analyze" enctype='application/json')
+        input(type="hidden" id = "score" name = "happyscore" value ="")
+        input(type="hidden" id ="left" name = "face" value = "")
+        input(type="hidden" id ="top" name = "face" value = "")
+        input(type="hidden" id ="width" name = "face" value = "")
+        input(type="hidden" id ="height" name = "face" value = "")
+        input(type="hidden" id="url" name ="url" value = "")
+        input(type="hidden" id ="scaleH" name = "scaleH" value="")
+        input(type="hidden" id ="scaleW" name = "scaleW" value="")
+        div(id = "image" class="picImage")
+        img(id="loader" src="/images/Preloader_7.gif" style="display:none;")
+        br
+        button(id = "sub" type="submit" style="display:none;") Submit  
+        
+        script.
+            function analyzeImage(){
+                $(function() {
+                    var imagePath = $('#url').val();
+                    var urlJson = '{ "url": "' + imagePath + '"}';
+                   
+                    var left= [];
+                    var top=[];
+                    var height =[];
+                    var width=[];
+                    
+                    $.ajax({
+                        url: "https://api.projectoxford.ai/emotion/v1.0/recognize?" ,
+                        beforeSend: function(xhrObj){
+                            xhrObj.setRequestHeader("Content-Type","application/json");
+                            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",$('#oxfordKey').val());
+                        },
+                        type: "POST",
+                        data: urlJson,
+                    })
+                    .done(function(data) {
+                        var happiness = 0;
+                        var sadness = 0;
+                        var happyscore = 0
+                        var count = data.length;
+                        
+                        getImgSize(imagePath);
+                              
+                            for(i =0; i<count; i++){
+                                happiness+= data[i].scores.happiness/count;
+                                
+                                sadness+= data[i].scores.sadness/count;
+                                // if(data[i].faceRectangle){
+                                    
+                                    left.push(data[i].faceRectangle.left);
+                                    $('#left').attr("value",left);
+                                    
+                                    top.push(data[i].faceRectangle.top);
+                                    $('#top').attr("value",top);
+                                    
+                                    width.push(data[i].faceRectangle.width);
+                                    $('#width').attr("value",width);
+                                    
+                                    height.push(data[i].faceRectangle.height);
+                                    $('#height').attr("value",height);
+                                    
+                                // }
+                                // else{
+                                //     alert("There are no faces in this image. Press search again")
+                                // }
+                            }
+                            if (happiness > sadness)
+                                happyscore = happyscore + 1
+                            else
+                                happyscore = happyscore - 1
+                            $('#score').attr("value",happyscore);
+                    })
+                    .fail(function (jqXHR, textStatus, error) {
+                        // alert("Something went wrong :( Press search again");
+                    });
+                });
+                };
+            function getImgSize(imgSrc) {
+                var newImg = new Image();
+
+                newImg.onload = function() {
+                    var height = newImg.height/400;
+                    var width = newImg.width/400;
+                    $('#scaleH').val(height);
+                    $('#scaleW').val(width);
+                }
+
+                newImg.src = imgSrc; // this must be done AFTER setting onload
+            }
+            function getImage() {
+                    $(function() {
+                        
+                        var $searchQuery = $('#searchBox').val();
+                        var params = {
+                            // Request parameters
+                            "q": $searchQuery,
+                            "count": "50",
+                            "qft": "+filterui:imagesize-custom_500_500+filterui:face-face"
+                            };
+                            //Create the search string
+                         $.ajax({
+                             url: "https://bingapis.azure-api.net/api/v5/images/search?" + $.param(params),
+                             beforeSend: function(xhrObj){
+                                 // Request headers
+                                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",$('#bingKey').val());
+                                 },
+                             type: "GET",
+                             data: "{body}",
+                             })
+                             .done(function(data) {
+                                 var randomIndex = Math.floor(Math.random()*50);
+                                 var imgSrc =  data.value[randomIndex].contentUrl;
+                                 $("#loader").hide();
+                                 $('#url').val(imgSrc);
+                                 var imgLink = '<img height="400px" src="' +imgSrc+ '" />';
+                                 $('#image').html(imgLink);
+                                 analyzeImage();})
+                             .fail(function() {
+                                 alert("error");
+                             });
+                    });
+                        
+                };    
+                
+            $(document).ready(function() {
+                //Declare variables
+                var $searchButton = $('#searchButton');
+                // Trigger function when button is clicked]
+                $searchButton.click(function(e) {
+                    e.preventDefault();
+                    // $("#image").empty();
+                    getImage();
+                });     
+            }); 
+  
